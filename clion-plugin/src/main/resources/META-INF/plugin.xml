@@ -1,0 +1,100 @@
+<idea-plugin>
+    <id>com.cph.clion</id>
+    <name>Competitive Programming Helper (CPH)</name>
+    <vendor email="support@cph.dev" url="https://github.com/agrawal-d/cph">CPH Team</vendor>
+
+    <description><![CDATA[
+        <h2>Competitive Programming Helper for CLion</h2>
+        <p>Quickly compile, run and judge competitive programming problems in CLion.</p>
+        <ul>
+            <li>Automatically download testcases from competitive programming websites</li>
+            <li>Write and test your own problems locally</li>
+            <li>Submit solutions directly to online judges</li>
+            <li>Supports C++, C, Python, Java, Rust, Go, and more</li>
+        </ul>
+        <p>Works with <a href="https://github.com/jmerle/competitive-companion">Competitive Companion</a> browser extension.</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Tool Window for Results -->
+        <toolWindow id="CPH Judge"
+                    secondary="true"
+                    icon="/icons/cph-icon.svg"
+                    anchor="right"
+                    factoryClass="com.cph.clion.ui.CphToolWindowFactory"/>
+
+        <!-- Application Service for Companion Server -->
+        <applicationService 
+            serviceImplementation="com.cph.clion.services.CompanionServerService"/>
+
+        <!-- Project Service for Problem Management -->
+        <projectService 
+            serviceImplementation="com.cph.clion.services.ProblemService"/>
+
+        <!-- Application Settings -->
+        <applicationConfigurable 
+            parentId="tools"
+            instance="com.cph.clion.settings.CphSettingsConfigurable"
+            id="com.cph.clion.settings"
+            displayName="CPH Settings"/>
+
+        <!-- Persist Settings -->
+        <applicationService 
+            serviceImplementation="com.cph.clion.settings.CphSettings"/>
+
+        <!-- Startup Activity -->
+        <postStartupActivity 
+            implementation="com.cph.clion.services.CphStartupActivity"/>
+
+        <!-- Notifications -->
+        <notificationGroup id="CPH Notifications" 
+                          displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <!-- Run Testcases Action -->
+        <action id="cph.runTestCases"
+                class="com.cph.clion.actions.RunTestCasesAction"
+                text="Run Testcases"
+                description="Run all testcases for the current file"
+                icon="AllIcons.Actions.Execute">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt B"/>
+            <add-to-group group-id="RunMenu" anchor="last"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+
+        <!-- Submit to Codeforces Action -->
+        <action id="cph.submitToCodeForces"
+                class="com.cph.clion.actions.SubmitToCodeforcesAction"
+                text="Submit to Codeforces"
+                description="Submit the current solution to Codeforces"
+                icon="AllIcons.Actions.Upload">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt S"/>
+            <add-to-group group-id="RunMenu" anchor="last"/>
+        </action>
+
+        <!-- Create/Edit Testcase Action -->
+        <action id="cph.editTestCases"
+                class="com.cph.clion.actions.EditTestCasesAction"
+                text="Edit Testcases"
+                description="Create or edit testcases for the current file"
+                icon="AllIcons.Actions.Edit">
+            <add-to-group group-id="RunMenu" anchor="last"/>
+        </action>
+
+        <!-- CPH Action Group -->
+        <group id="cph.actionGroup" 
+               text="CPH" 
+               description="Competitive Programming Helper actions"
+               popup="true"
+               icon="AllIcons.Toolwindows.ToolWindowRun">
+            <reference ref="cph.runTestCases"/>
+            <reference ref="cph.submitToCodeForces"/>
+            <reference ref="cph.editTestCases"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </group>
+    </actions>
+</idea-plugin>
