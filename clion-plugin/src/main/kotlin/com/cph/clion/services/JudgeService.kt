@@ -11,8 +11,9 @@ import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.util.Key
 import java.io.File
 import java.io.OutputStreamWriter
-import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
 /**
@@ -24,6 +25,11 @@ object JudgeService {
 
     // Track running processes so they can be killed if needed
     private val runningProcesses = ConcurrentHashMap<Long, OSProcessHandler>()
+    
+    // Scheduler for timeout handling
+    private val scheduler: ScheduledExecutorService = Executors.newScheduledThreadPool(1) { r ->
+        Thread(r, "CPH-JudgeTimeout").apply { isDaemon = true }
+    }
 
     /**
      * Run a single test case and return the result.
@@ -112,18 +118,13 @@ object JudgeService {
 
             processHandler.startNotify()
 
-            // Set up timeout
-            Thread {
-                try {
-                    Thread.sleep(timeout)
-                    val handler = runningProcesses[testCase.id]
-                    if (handler != null && !handler.isProcessTerminated) {
-                        handler.destroyProcess()
-                    }
-                } catch (e: InterruptedException) {
-                    // Ignore
+            // Set up timeout using scheduler
+            scheduler.schedule({
+                val handler = runningProcesses[testCase.id]
+                if (handler != null && !handler.isProcessTerminated) {
+                    handler.destroyProcess()
                 }
-            }.start()
+            }, timeout, TimeUnit.MILLISECONDS)
 
         } catch (e: Exception) {
             logger.error("Error running testcase", e)

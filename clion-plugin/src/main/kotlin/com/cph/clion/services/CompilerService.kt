@@ -12,6 +12,8 @@ import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.util.Key
 import java.io.File
 import java.util.concurrent.CompletableFuture
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
 
 /**
@@ -20,6 +22,11 @@ import java.util.concurrent.TimeUnit
 object CompilerService {
 
     private val logger = Logger.getInstance(CompilerService::class.java)
+    
+    // Scheduler for timeout handling
+    private val scheduler: ScheduledExecutorService = Executors.newScheduledThreadPool(1) { r ->
+        Thread(r, "CPH-CompilerTimeout").apply { isDaemon = true }
+    }
 
     data class CompilationResult(
         val success: Boolean,
@@ -96,23 +103,18 @@ object CompilerService {
 
             processHandler.startNotify()
 
-            // Set a timeout for compilation
-            Thread {
-                try {
-                    Thread.sleep(60000) // 60 second timeout
-                    if (!future.isDone) {
-                        processHandler.destroyProcess()
-                        future.complete(CompilationResult(
-                            success = false,
-                            output = "",
-                            errorOutput = "Compilation timed out",
-                            exitCode = -1
-                        ))
-                    }
-                } catch (e: InterruptedException) {
-                    // Ignore
+            // Set a timeout for compilation using scheduler
+            scheduler.schedule({
+                if (!future.isDone) {
+                    processHandler.destroyProcess()
+                    future.complete(CompilationResult(
+                        success = false,
+                        output = "",
+                        errorOutput = "Compilation timed out",
+                        exitCode = -1
+                    ))
                 }
-            }.start()
+            }, 60, TimeUnit.SECONDS)
 
         } catch (e: Exception) {
             logger.error("Compilation error", e)

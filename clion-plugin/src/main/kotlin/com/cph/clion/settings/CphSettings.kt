@@ -69,7 +69,7 @@ class CphSettings : PersistentStateComponent<CphSettings.State> {
         // Codeforces submission compilers
         var cppSubmissionCompiler: String = "GNU G++17 7.3.0",
         var cSubmissionCompiler: String = "GNU GCC C11 5.1.0",
-        var pythonSubmissionCompiler: String = "PyPy 3.6 (7.2.0)",
+        var pythonSubmissionCompiler: String = "PyPy 3.10 (7.3.15, 64bit)",
         var javaSubmissionCompiler: String = "Java 11.0.6",
         var rustSubmissionCompiler: String = "Rust 1.75.0 (2021)",
         var goSubmissionCompiler: String = "Go 1.22.2",

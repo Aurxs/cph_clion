@@ -125,7 +125,15 @@ class CphJudgePanel(private val project: Project) : SimpleToolWindowPanel(true, 
             if (!problem.local) {
                 val urlButton = JButton("Open URL", AllIcons.Ide.External_link_arrow)
                 urlButton.addActionListener {
-                    java.awt.Desktop.getDesktop().browse(java.net.URI(problem.url))
+                    try {
+                        if (java.awt.Desktop.isDesktopSupported() && java.awt.Desktop.getDesktop().isSupported(java.awt.Desktop.Action.BROWSE)) {
+                            java.awt.Desktop.getDesktop().browse(java.net.URI(problem.url))
+                        } else {
+                            showNotification("Cannot open browser on this system", NotificationType.WARNING)
+                        }
+                    } catch (e: Exception) {
+                        showNotification("Failed to open URL: ${e.message}", NotificationType.ERROR)
+                    }
                 }
                 add(urlButton, BorderLayout.EAST)
             }
