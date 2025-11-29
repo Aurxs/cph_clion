@@ -1,7 +1,7 @@
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "1.9.21"
-    id("org.jetbrains.intellij") version "1.16.1"
+    id("org.jetbrains.intellij") version "1.17.4"
 }
 
 group = "com.cph"
@@ -13,9 +13,10 @@ repositories {
 
 // Configure Gradle IntelliJ Plugin
 intellij {
-    version.set("2023.3")
-    type.set("CL") // CLion
-    plugins.set(listOf("com.intellij.clion"))
+    version.set("2024.1")
+    type.set("IC") // Use IntelliJ Community for offline compatibility
+    updateSinceUntilBuild.set(false)
+    downloadSources.set(false)
 }
 
 tasks {
@@ -29,8 +30,8 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("233")
-        untilBuild.set("241.*")
+        sinceBuild.set("241")
+        untilBuild.set("243.*")
     }
 
     signPlugin {
@@ -41,6 +42,10 @@ tasks {
 
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
+    }
+    
+    buildSearchableOptions {
+        enabled = false
     }
 }
 
