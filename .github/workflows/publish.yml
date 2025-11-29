@@ -1,8 +1,10 @@
 name: Publish Extension
 
 on:
-    push:
-        branches: [main]
+    workflow_dispatch:
+        # Manual trigger for publishing extension
+    release:
+        types: [published]
 
 jobs:
     build:
