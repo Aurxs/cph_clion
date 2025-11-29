@@ -1,0 +1,42 @@
+name: Build CLion Plugin
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'clion-plugin/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'clion-plugin/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        
+      - name: Build Plugin
+        working-directory: clion-plugin
+        run: ./gradlew buildPlugin
+        
+      - name: Upload Plugin Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cph-clion-plugin
+          path: clion-plugin/build/distributions/*.zip
+          retention-days: 30

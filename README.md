@@ -29,20 +29,28 @@ TopCoder etc. with the help of competitive companion browser extension
 
 ## Quick start (CLion/IntelliJ)
 
-1. Build the CLion plugin from source (see [CLion Plugin Installation](#clion-plugin-installation) below).
+1. Download the latest plugin from the [Releases page](https://github.com/Aurxs/cph_clion/releases) or build from source (see [CLion Plugin Installation](#clion-plugin-installation) below).
 2. [Install competitive companion](https://github.com/jmerle/competitive-companion#readme)
    in your browser.
 3. Open CLion and create/open a project folder.
 4. Use Companion by pressing the green plus (+) circle from the browser toolbar
    when visiting any problem page.
 5. The file opens in CLion with testcases preloaded. Press
-   <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> to run them.
+   <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> (Windows/Linux) or <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>B</kbd> (macOS) to run them.
+
+📖 **Documentation**: [English Guide](docs/clion-user-guide.md) | [中文指南](docs/clion-user-guide-zh.md)
 
 ---
 
 ## CLion Plugin Installation
 
-The CLion plugin is located in the `clion-plugin/` directory.
+The CLion plugin is located in the `clion-plugin/` directory and supports **Windows**, **Linux**, and **macOS**.
+
+### Installing from Releases (Recommended)
+
+1. Download the latest plugin ZIP from the [Releases page](https://github.com/Aurxs/cph_clion/releases)
+2. In CLion, go to **Settings** → **Plugins** → **⚙️** → **Install Plugin from Disk...**
+3. Select the downloaded ZIP file and restart the IDE
 
 ### Building from Source
 
@@ -64,15 +72,14 @@ The CLion plugin is located in the `clion-plugin/` directory.
 - **Test Case Management**: Add, edit, and delete test cases
 - **Automatic Compilation**: Compile your code before running tests
 - **Judge Results**: See pass/fail status, execution time, and output comparison
-- **Codeforces Submit**: Submit solutions via cph-submit browser extension
 - **Configurable Settings**: Customize compilers, timeouts, and more
 
 ### Keyboard Shortcuts (CLion)
 
-| Shortcut | Action |
-|----------|--------|
-| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> | Run all test cases |
-| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd> | Submit to Codeforces |
+| Action | Windows/Linux | macOS |
+|--------|---------------|-------|
+| Run all test cases | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> | <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>B</kbd> |
+| Edit test cases | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>E</kbd> | <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>E</kbd> |
 
 ---
 
