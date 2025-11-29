@@ -3,16 +3,20 @@
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fagrawal-d%2Fcph%2Fbadge%3Fref%3Dmain&style=flat)](https://actions-badge.atrox.dev/agrawal-d/cph/goto?ref=main)
 [![Downloads](https://img.shields.io/visual-studio-marketplace/d/DivyanshuAgrawal.competitive-programming-helper)](https://marketplace.visualstudio.com/items?itemName=DivyanshuAgrawal.competitive-programming-helper)
 
-Quickly compile, run and judge competitive programming problems in VS Code.
-Automatically download testcases , or write & test your own problems. Once you
+Quickly compile, run and judge competitive programming problems in **VS Code** or **CLion/IntelliJ**.
+Automatically download testcases, or write & test your own problems. Once you
 are done, easily submit your solutions directly with the click of a button!
+
+> **Note:** This repository now includes support for both VS Code and CLion/JetBrains IDEs!
 
 Cph supports a large number of popular platforms like Codeforces, Codechef,
 TopCoder etc. with the help of competitive companion browser extension
 
 ![Screenshot](screenshots/screenshot-main.png)
 
-## Quick start
+---
+
+## Quick start (VS Code)
 
 1. [Install cph](https://marketplace.visualstudio.com/items?itemName=DivyanshuAgrawal.competitive-programming-helper)
    in VS Code and open any folder.
@@ -22,6 +26,57 @@ TopCoder etc. with the help of competitive companion browser extension
    when visiting any problem page.
 1. The file opens in VS Code with testcases preloaded. Press
    <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> to run them.
+
+## Quick start (CLion/IntelliJ)
+
+1. Build the CLion plugin from source (see [CLion Plugin Installation](#clion-plugin-installation) below).
+2. [Install competitive companion](https://github.com/jmerle/competitive-companion#readme)
+   in your browser.
+3. Open CLion and create/open a project folder.
+4. Use Companion by pressing the green plus (+) circle from the browser toolbar
+   when visiting any problem page.
+5. The file opens in CLion with testcases preloaded. Press
+   <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> to run them.
+
+---
+
+## CLion Plugin Installation
+
+The CLion plugin is located in the `clion-plugin/` directory.
+
+### Building from Source
+
+1. Make sure you have JDK 17+ installed.
+2. Navigate to the plugin directory:
+   ```bash
+   cd clion-plugin
+   ```
+3. Build the plugin:
+   ```bash
+   ./gradlew buildPlugin
+   ```
+4. The plugin ZIP file will be in `clion-plugin/build/distributions/`.
+5. In CLion, go to **Settings** → **Plugins** → **⚙️** → **Install Plugin from Disk...** and select the ZIP file.
+
+### Features (CLion)
+
+- **Competitive Companion Integration**: Automatically receive problems from your browser
+- **Test Case Management**: Add, edit, and delete test cases
+- **Automatic Compilation**: Compile your code before running tests
+- **Judge Results**: See pass/fail status, execution time, and output comparison
+- **Codeforces Submit**: Submit solutions via cph-submit browser extension
+- **Configurable Settings**: Customize compilers, timeouts, and more
+
+### Keyboard Shortcuts (CLion)
+
+| Shortcut | Action |
+|----------|--------|
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> | Run all test cases |
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd> | Submit to Codeforces |
+
+---
+
+## Quick start (VS Code - Legacy)
 
 -   (Optional) Install the [cph-submit](https://github.com/agrawal-d/cph-submit)
     browser extension to enable submitting directly on CodeForces.

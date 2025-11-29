@@ -129,3 +129,8 @@ dist
 releases/
 **/*.vsix
 src/secrets.ts
+
+# CLion plugin build artifacts
+clion-plugin/.gradle/
+clion-plugin/build/
+clion-plugin/.idea/
