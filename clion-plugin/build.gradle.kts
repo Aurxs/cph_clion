@@ -12,9 +12,11 @@ repositories {
 }
 
 // Configure Gradle IntelliJ Plugin
+// Using IntelliJ Community (IC) as base platform for broader compatibility
+// The plugin works with any JetBrains IDE that supports the platform dependencies
 intellij {
     version.set("2024.1")
-    type.set("IC") // Use IntelliJ Community for offline compatibility
+    type.set("IC") // IntelliJ Community - provides base platform without CLion-specific dependencies
     updateSinceUntilBuild.set(false)
     downloadSources.set(false)
 }

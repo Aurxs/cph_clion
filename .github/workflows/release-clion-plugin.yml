@@ -43,7 +43,7 @@ jobs:
       - name: Update version in build.gradle.kts
         working-directory: clion-plugin
         run: |
-          sed -i "s/version = \".*\"/version = \"${{ steps.version.outputs.VERSION }}\"/" build.gradle.kts
+          sed -i 's/^version = ".*"/version = "${{ steps.version.outputs.VERSION }}"/' build.gradle.kts
           
       - name: Build Plugin
         working-directory: clion-plugin

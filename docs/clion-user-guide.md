@@ -202,7 +202,13 @@ For C++ with Homebrew:
 ```bash
 brew install gcc
 ```
-Then set compiler command to `/usr/local/bin/g++-13` (or your version)
+Then set compiler command to `/usr/local/bin/g++-13` (or your installed version - check with `brew list gcc`)
+
+For Apple Silicon Macs (M1/M2/M3), the path is typically:
+```
+/opt/homebrew/bin/g++-13
+```
+(Replace `13` with your actual GCC version)
 
 ### Binary permission issues on macOS
 

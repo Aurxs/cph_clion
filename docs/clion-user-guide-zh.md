@@ -202,13 +202,13 @@ macOS 使用 Homebrew：
 ```bash
 brew install gcc
 ```
-然后将编译器命令设置为 `/usr/local/bin/g++-13`（或你的版本）
+然后将编译器命令设置为 `/usr/local/bin/g++-13`（或你安装的版本，使用 `brew list gcc` 查看）
 
-对于 Apple Silicon Mac (M1/M2/M3)：
-```bash
-brew install gcc
+对于 Apple Silicon Mac (M1/M2/M3)，路径通常是：
 ```
-编译器路径通常是 `/opt/homebrew/bin/g++-13`
+/opt/homebrew/bin/g++-13
+```
+（将 `13` 替换为你实际的 GCC 版本）
 
 ### macOS 上的二进制权限问题
 
