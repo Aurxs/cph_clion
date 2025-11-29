@@ -1,0 +1,95 @@
+name: Release CLion Plugin
+
+on:
+  push:
+    tags:
+      - 'clion-v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number (e.g., 1.0.0)'
+        required: true
+        default: '1.0.0'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        
+      - name: Determine version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            VERSION=${GITHUB_REF#refs/tags/clion-v}
+            echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Update version in build.gradle.kts
+        working-directory: clion-plugin
+        run: |
+          sed -i "s/version = \".*\"/version = \"${{ steps.version.outputs.VERSION }}\"/" build.gradle.kts
+          
+      - name: Build Plugin
+        working-directory: clion-plugin
+        run: ./gradlew buildPlugin
+        
+      - name: Get plugin file name
+        id: plugin_file
+        working-directory: clion-plugin
+        run: |
+          PLUGIN_FILE=$(ls build/distributions/*.zip | head -1)
+          echo "PLUGIN_FILE=$PLUGIN_FILE" >> $GITHUB_OUTPUT
+          echo "PLUGIN_NAME=$(basename $PLUGIN_FILE)" >> $GITHUB_OUTPUT
+          
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: CPH CLion Plugin v${{ steps.version.outputs.VERSION }}
+          body: |
+            ## Competitive Programming Helper (CPH) for JetBrains IDEs
+            
+            ### Installation
+            1. Download the ZIP file below
+            2. Open your JetBrains IDE (CLion, IntelliJ IDEA, etc.)
+            3. Go to **Settings/Preferences** → **Plugins**
+            4. Click the **⚙️ (gear icon)** → **Install Plugin from Disk...**
+            5. Select the downloaded ZIP file
+            6. Restart the IDE
+            
+            ### Documentation
+            - [English User Guide](https://github.com/${{ github.repository }}/blob/main/docs/clion-user-guide.md)
+            - [中文使用指南](https://github.com/${{ github.repository }}/blob/main/docs/clion-user-guide-zh.md)
+            
+            ### Keyboard Shortcuts
+            | Action | Windows/Linux | macOS |
+            |--------|---------------|-------|
+            | Run test cases | Ctrl+Alt+B | ⌘+⌥+B |
+            | Submit to Codeforces | Ctrl+Alt+S | ⌘+⌥+S |
+            | Edit test cases | Ctrl+Alt+E | ⌘+⌥+E |
+            
+            ### What's New
+            - macOS keyboard shortcut support
+            - Cross-platform compatibility improvements
+            - Bilingual documentation (English & Chinese)
+          files: ${{ steps.plugin_file.outputs.PLUGIN_FILE }}
+          draft: false
+          prerelease: false
+          tag_name: ${{ github.event_name == 'workflow_dispatch' && format('clion-v{0}', steps.version.outputs.VERSION) || github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
