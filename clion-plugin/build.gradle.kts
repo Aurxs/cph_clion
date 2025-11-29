@@ -32,8 +32,11 @@ tasks {
     }
 
     patchPluginXml {
+        // sinceBuild 241 corresponds to IntelliJ Platform 2024.1
         sinceBuild.set("241")
-        untilBuild.set("243.*")
+        // untilBuild is intentionally omitted to support all future IDE versions.
+        // The plugin uses stable platform APIs (com.intellij.modules.platform, com.intellij.modules.lang).
+        // Note: Future IDE updates may require testing to ensure compatibility.
     }
 
     signPlugin {
