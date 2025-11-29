@@ -280,9 +280,9 @@ class ProblemService(private val project: Project) {
         val probFileName = srcFile.nameWithoutExtension + PROBLEM_FILE_EXTENSION
 
         return if (settings.saveLocation.isNotEmpty() && File(settings.saveLocation).exists()) {
-            File(settings.saveLocation, ".cph", probFileName).absolutePath
+            File(File(settings.saveLocation, ".cph"), probFileName).absolutePath
         } else {
-            File(srcFile.parent, ".cph", probFileName).absolutePath
+            File(File(srcFile.parent, ".cph"), probFileName).absolutePath
         }
     }
 

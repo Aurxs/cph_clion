@@ -2,6 +2,7 @@ package com.cph.clion.ui
 
 import com.cph.clion.services.ProblemService
 import com.intellij.openapi.fileEditor.FileEditorManager
+import com.intellij.openapi.fileEditor.FileEditorManagerEvent
 import com.intellij.openapi.fileEditor.FileEditorManagerListener
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
@@ -27,7 +28,7 @@ class CphToolWindowFactory : ToolWindowFactory {
                     updateProblemForFile(project, judgePanel, file)
                 }
 
-                override fun selectionChanged(event: FileEditorManagerListener.FileEditorManagerEvent) {
+                override fun selectionChanged(event: FileEditorManagerEvent) {
                     event.newFile?.let { file ->
                         updateProblemForFile(project, judgePanel, file)
                     }
