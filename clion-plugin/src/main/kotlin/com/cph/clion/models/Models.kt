@@ -1,7 +1,5 @@
 package com.cph.clion.models
 
-import com.google.gson.annotations.SerializedName
-
 /**
  * Represents a single test case with input and expected output.
  */
@@ -58,17 +56,6 @@ data class Language(
     val compiler: String,
     val args: List<String>,
     val skipCompile: Boolean
-)
-
-/**
- * Response format for Codeforces submission via cph-submit extension.
- */
-data class CphSubmitResponse(
-    val empty: Boolean = false,
-    val url: String = "",
-    val problemName: String = "",
-    val sourceCode: String = "",
-    val languageId: Int = -1
 )
 
 /**

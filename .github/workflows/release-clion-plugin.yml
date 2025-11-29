@@ -80,7 +80,6 @@ jobs:
             | Action | Windows/Linux | macOS |
             |--------|---------------|-------|
             | Run test cases | Ctrl+Alt+B | ⌘+⌥+B |
-            | Submit to Codeforces | Ctrl+Alt+S | ⌘+⌥+S |
             | Edit test cases | Ctrl+Alt+E | ⌘+⌥+E |
             
             ### What's New

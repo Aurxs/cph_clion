@@ -1,6 +1,5 @@
 package com.cph.clion.services
 
-import com.cph.clion.models.CphSubmitResponse
 import com.cph.clion.models.Problem
 import com.google.gson.Gson
 import com.intellij.notification.NotificationGroupManager
@@ -22,7 +21,6 @@ class CompanionServerService {
     private val logger = Logger.getInstance(CompanionServerService::class.java)
     private val gson = Gson()
     private var server: HttpServer? = null
-    private var savedResponse: CphSubmitResponse = CphSubmitResponse(empty = true)
 
     companion object {
         const val COMPANION_PORT = 27121
@@ -53,19 +51,8 @@ class CompanionServerService {
                 createContext("/") { exchange ->
                     try {
                         val requestBody = exchange.requestBody.bufferedReader().readText()
-                        val isCphSubmit = exchange.requestHeaders.getFirst("cph-submit") == "true"
 
-                        if (isCphSubmit) {
-                            // Handle cph-submit extension request
-                            val responseBody = gson.toJson(savedResponse)
-                            exchange.responseHeaders.add("Content-Type", "application/json")
-                            exchange.sendResponseHeaders(200, responseBody.length.toLong())
-                            exchange.responseBody.use { it.write(responseBody.toByteArray()) }
-
-                            if (!savedResponse.empty) {
-                                savedResponse = CphSubmitResponse(empty = true)
-                            }
-                        } else if (requestBody.isNotEmpty()) {
+                        if (requestBody.isNotEmpty()) {
                             // Handle Competitive Companion problem
                             try {
                                 val problem = gson.fromJson(requestBody, Problem::class.java)
@@ -113,14 +100,6 @@ class CompanionServerService {
         server?.stop(0)
         server = null
         logger.info("Companion server stopped")
-    }
-
-    /**
-     * Store a response to be sent to the cph-submit extension for Codeforces submission.
-     */
-    fun storeSubmitResponse(response: CphSubmitResponse) {
-        savedResponse = response
-        logger.info("Stored submit response for: ${response.problemName}")
     }
 
     /**

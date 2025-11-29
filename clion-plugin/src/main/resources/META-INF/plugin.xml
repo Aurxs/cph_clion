@@ -10,7 +10,6 @@
         <ul>
             <li>Automatically download testcases from competitive programming websites</li>
             <li>Write and test your own problems locally</li>
-            <li>Submit solutions directly to online judges</li>
             <li>Supports C++, C, Python, Java, Rust, Go, and more</li>
             <li>Native keyboard shortcuts for each platform (Ctrl+Alt on Windows/Linux, ⌘+⌥ on macOS)</li>
         </ul>
@@ -72,20 +71,6 @@
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
 
-        <!-- Submit to Codeforces Action -->
-        <action id="cph.submitToCodeForces"
-                class="com.cph.clion.actions.SubmitToCodeforcesAction"
-                text="Submit to Codeforces"
-                description="Submit the current solution to Codeforces"
-                icon="AllIcons.Actions.Upload">
-            <!-- Windows/Linux: Ctrl+Alt+S -->
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt S"/>
-            <!-- macOS: Cmd+Option+S -->
-            <keyboard-shortcut keymap="Mac OS X" first-keystroke="meta alt S"/>
-            <keyboard-shortcut keymap="Mac OS X 10.5+" first-keystroke="meta alt S"/>
-            <add-to-group group-id="RunMenu" anchor="last"/>
-        </action>
-
         <!-- Create/Edit Testcase Action -->
         <action id="cph.editTestCases"
                 class="com.cph.clion.actions.EditTestCasesAction"
@@ -107,7 +92,6 @@
                popup="true"
                icon="AllIcons.Toolwindows.ToolWindowRun">
             <reference ref="cph.runTestCases"/>
-            <reference ref="cph.submitToCodeForces"/>
             <reference ref="cph.editTestCases"/>
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </group>

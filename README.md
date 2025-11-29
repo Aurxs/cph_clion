@@ -72,7 +72,6 @@ The CLion plugin is located in the `clion-plugin/` directory and supports **Wind
 - **Test Case Management**: Add, edit, and delete test cases
 - **Automatic Compilation**: Compile your code before running tests
 - **Judge Results**: See pass/fail status, execution time, and output comparison
-- **Codeforces Submit**: Submit solutions via cph-submit browser extension
 - **Configurable Settings**: Customize compilers, timeouts, and more
 
 ### Keyboard Shortcuts (CLion)
@@ -80,7 +79,6 @@ The CLion plugin is located in the `clion-plugin/` directory and supports **Wind
 | Action | Windows/Linux | macOS |
 |--------|---------------|-------|
 | Run all test cases | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> | <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>B</kbd> |
-| Submit to Codeforces | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd> | <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>S</kbd> |
 | Edit test cases | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>E</kbd> | <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>E</kbd> |
 
 ---

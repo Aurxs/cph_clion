@@ -11,7 +11,6 @@
 - [键盘快捷键](#键盘快捷键)
 - [功能特性](#功能特性)
 - [配置设置](#配置设置)
-- [提交到 Codeforces](#提交到-codeforces)
 - [常见问题](#常见问题)
 
 ## 安装
@@ -94,7 +93,6 @@
 | 操作 | 快捷键 |
 |------|--------|
 | 运行所有测试用例 | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> |
-| 提交到 Codeforces | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd> |
 | 编辑测试用例 | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>E</kbd> |
 
 ### macOS
@@ -102,7 +100,6 @@
 | 操作 | 快捷键 |
 |------|--------|
 | 运行所有测试用例 | <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>B</kbd> |
-| 提交到 Codeforces | <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>S</kbd> |
 | 编辑测试用例 | <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>E</kbd> |
 
 你也可以通过以下方式访问这些操作：
@@ -152,7 +149,6 @@
 对于每种语言，你可以配置：
 - **编译器命令**：编译器可执行文件（如 g++、clang++）
 - **编译器参数**：额外的编译选项（如 -O2、-std=c++17）
-- **提交编译器**：Codeforces 提交时使用的编译器
 
 ### C++ 配置示例
 
@@ -166,23 +162,6 @@ macOS 使用 Homebrew：
 编译器命令: /usr/local/bin/g++-13
 编译器参数: -O2 -std=c++17
 ```
-
-## 提交到 Codeforces
-
-插件支持通过 [cph-submit](https://github.com/agrawal-d/cph-submit) 浏览器扩展提交解决方案到 Codeforces。
-
-### 设置步骤
-
-1. 安装 [cph-submit](https://github.com/agrawal-d/cph-submit) 浏览器扩展
-2. 确保你已在浏览器中登录 Codeforces
-3. 打开从 Codeforces 获取的题目
-4. 按提交快捷键或使用菜单
-
-### 提交流程
-
-1. 按 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd>（Windows/Linux）或 <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>S</kbd>（macOS）
-2. 在浏览器中点击 cph-submit 按钮
-3. 解决方案将自动提交
 
 ## 常见问题
 

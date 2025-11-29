@@ -11,7 +11,6 @@ This guide explains how to install and use the Competitive Programming Helper (C
 - [Keyboard Shortcuts](#keyboard-shortcuts)
 - [Features](#features)
 - [Configuration](#configuration)
-- [Submitting to Codeforces](#submitting-to-codeforces)
 - [Troubleshooting](#troubleshooting)
 
 ## Installation
@@ -94,7 +93,6 @@ After installation, you'll see a new **CPH Judge** tool window on the right side
 | Action | Shortcut |
 |--------|----------|
 | Run all test cases | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> |
-| Submit to Codeforces | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd> |
 | Edit test cases | <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>E</kbd> |
 
 ### macOS
@@ -102,7 +100,6 @@ After installation, you'll see a new **CPH Judge** tool window on the right side
 | Action | Shortcut |
 |--------|----------|
 | Run all test cases | <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>B</kbd> |
-| Submit to Codeforces | <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>S</kbd> |
 | Edit test cases | <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>E</kbd> |
 
 You can also access these actions from:
@@ -152,7 +149,6 @@ Open **Settings/Preferences** → **Tools** → **CPH Settings** to configure:
 For each language, you can configure:
 - **Compiler Command**: The compiler executable (e.g., g++, clang++)
 - **Compiler Arguments**: Additional flags (e.g., -O2, -std=c++17)
-- **Submission Compiler**: Which compiler to use for Codeforces submissions
 
 ### Example C++ Configuration
 
@@ -166,23 +162,6 @@ For macOS with Homebrew:
 Compiler Command: /usr/local/bin/g++-13
 Compiler Arguments: -O2 -std=c++17
 ```
-
-## Submitting to Codeforces
-
-The plugin supports submitting solutions to Codeforces using the [cph-submit](https://github.com/agrawal-d/cph-submit) browser extension.
-
-### Setup
-
-1. Install [cph-submit](https://github.com/agrawal-d/cph-submit) browser extension
-2. Make sure you're logged into Codeforces in your browser
-3. Open a problem fetched from Codeforces
-4. Press the submit shortcut or use the menu
-
-### Submitting
-
-1. Press <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd> (Windows/Linux) or <kbd>⌘</kbd>+<kbd>⌥</kbd>+<kbd>S</kbd> (macOS)
-2. Click the cph-submit button in your browser
-3. The solution will be submitted automatically
 
 ## Troubleshooting
 
